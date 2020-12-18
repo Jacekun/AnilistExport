@@ -18,5 +18,23 @@ namespace AnilistExport
             InitializeComponent();
             Text = "Anilist Export v" + Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
+
+        private void BtnExport_Click(object sender, EventArgs e)
+        {
+            // Disable button
+            btnExport.Enabled = false;
+
+            //MessageBox.Show("Wait for task to finish...");
+
+            string UserID = GlobalFunc.AnilistGetUserId(txtUser.Text);
+            if (!String.IsNullOrWhiteSpace(UserID))
+            {
+                GlobalFunc.WriteFile("userid.json", UserID);
+                //MessageBox.Show("Result is not null!");
+            }
+
+            // Enable button
+            btnExport.Enabled = true;
+        }
     }
 }

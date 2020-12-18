@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Net.Http;
+using System.Diagnostics;
+using System.Net;
+using Newtonsoft.Json;
 
 namespace AnilistExport
 {
@@ -29,6 +33,20 @@ namespace AnilistExport
                 return (toMal ? "0000-00-00" : "");
             }
             return ret;
+        }
+
+        // Write to File
+        public static bool WriteFile(string file, string content)
+        {
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(File.Open(file, FileMode.Create), Encoding.UTF8))
+                {
+                    sw.WriteLine(content);
+                    return true;
+                }
+            }
+            catch { return false; }
         }
 
         // Write to File, append
@@ -165,6 +183,48 @@ namespace AnilistExport
             xmltoWrite += "\t\t" + toMalVal("1", "update_on_import") + "\n";
             xmltoWrite += "\t</anime>\n";
             return xmltoWrite;
+        }
+
+        // Get User ID, from Anilist. Using 'username'.
+        public static string AnilistGetUserId(string user)
+        {
+            try
+            {
+                string query = "query ($userName: String) { User (search: $userName) { id } }";
+                Console.WriteLine(query);
+
+                Console.WriteLine("Create HTTP Client");
+                var httpClient = new HttpClient
+                {
+                    BaseAddress = new Uri(AnilistURL)
+                };
+
+                Console.WriteLine("Query");
+                var queryObject = new
+                {
+                    query = query, 
+                    variables = new { }
+                };
+
+                Console.WriteLine("Request Msg");
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Post,
+                    Content = new StringContent(JsonConvert.SerializeObject(queryObject), Encoding.UTF8, "application/json")
+                };
+
+                Console.WriteLine("Send Async req");
+                using (var response =  httpClient.SendAsync(request))
+                {
+                    Console.WriteLine("Getting response..");
+                    //response.EnsureSuccessStatusCode();
+                    Console.WriteLine("Gets answer");
+                    var responseString = response.Result.ToString();
+                    Console.WriteLine(responseString);
+                    return responseString;
+                }
+
+            } catch (Exception ex) { Console.WriteLine(ex.Message); return ""; };
         }
     // End of class: GlobalFunc
     }
