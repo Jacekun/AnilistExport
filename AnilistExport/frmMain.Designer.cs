@@ -40,14 +40,14 @@
             this.label1.Location = new System.Drawing.Point(0, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(512, 36);
+            this.label1.Size = new System.Drawing.Size(512, 56);
             this.label1.TabIndex = 0;
             this.label1.Text = "Enter your Username, and Click on \'Export\'";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblUser
             // 
-            this.lblUser.Location = new System.Drawing.Point(0, 109);
+            this.lblUser.Location = new System.Drawing.Point(0, 79);
             this.lblUser.Name = "lblUser";
             this.lblUser.Size = new System.Drawing.Size(148, 34);
             this.lblUser.TabIndex = 1;
@@ -55,7 +55,7 @@
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(154, 109);
+            this.txtUser.Location = new System.Drawing.Point(154, 79);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(346, 40);
             this.txtUser.TabIndex = 2;
@@ -64,7 +64,7 @@
             // 
             this.btnExport.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.btnExport.ForeColor = System.Drawing.Color.Silver;
-            this.btnExport.Location = new System.Drawing.Point(94, 182);
+            this.btnExport.Location = new System.Drawing.Point(94, 152);
             this.btnExport.Name = "btnExport";
             this.btnExport.Size = new System.Drawing.Size(288, 58);
             this.btnExport.TabIndex = 3;
@@ -76,7 +76,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 33F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(512, 267);
+            this.ClientSize = new System.Drawing.Size(512, 391);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.txtUser);
             this.Controls.Add(this.lblUser);
