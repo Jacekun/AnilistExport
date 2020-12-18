@@ -140,6 +140,32 @@ namespace AnilistExport
             xmltoWrite += "\t</manga>\n";
             return xmltoWrite;
         }
+        public static string EntryMalAnime(string malID, JsonMediaEntry entry)
+        {
+            string xmltoWrite = "\t<anime>\n";
+            xmltoWrite += "\t\t" + toMalVal(malID, "series_animedb_id") + "\n";
+            xmltoWrite += "\t\t" + toMalString(ValidateString(entry.media.title.romaji), "series_title") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("", "series_type") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(entry.media.episodes.ToString(), "series_episodes") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("0", "my_id") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(entry.progress.ToString(), "my_watched_episodes") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(ValidateDate(entry.startedAt.year, entry.startedAt.month, entry.startedAt.day), "my_start_date") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(ValidateDate(entry.completedAt.year, entry.completedAt.month, entry.completedAt.day), "my_finish_date") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("", "my_rated") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(entry.score.ToString(), "my_score") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("", "my_dvd") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("", "my_storage") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(toMalStatus(entry.status, "anime"), "my_status") + "\n";
+            xmltoWrite += "\t\t" + toMalString(ValidateString(entry.notes), "my_comments") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("0", "my_times_watched") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("", "my_rewatch_value") + "\n";
+            xmltoWrite += "\t\t" + toMalString("", "my_tags") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("0", "my_rewatching") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("0", "my_rewatching_ep") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("1", "update_on_import") + "\n";
+            xmltoWrite += "\t</anime>\n";
+            return xmltoWrite;
+        }
     // End of class: GlobalFunc
     }
 }

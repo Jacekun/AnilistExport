@@ -15,56 +15,6 @@ def line_prepender(filename, line):
         f.seek(0, 0)
         f.write(line + '\n' + content)
 
-
-# Return string to add to MAL XML
-def entry_mangaxml(malID, entry):
-  xmltoWrite = "\t<manga>\n"
-  xmltoWrite += "\t\t" + toMalval(malID, 'manga_mangadb_id') + '\n'
-  xmltoWrite += "\t\t" + toMalstr(validateStr(entry["media"]["title"]["romaji"]), 'manga_title') + '\n'
-  xmltoWrite += "\t\t" + toMalval(validateInt(entry["media"]["volumes"]), 'manga_volumes') + '\n'
-  xmltoWrite += "\t\t" + toMalval(validateInt(entry["media"]["chapters"]), 'manga_chapters') + '\n'
-  xmltoWrite += "\t\t" + toMalval('', 'my_id') + '\n'
-  xmltoWrite += "\t\t" + toMalval(validateInt(entry["progressVolumes"]), 'my_read_volumes') + '\n'
-  xmltoWrite += "\t\t" + toMalval(validateInt(entry["progress"]), 'my_read_chapters') + '\n'
-  xmltoWrite += "\t\t" + toMalval(toMaldate(entry["startedAt"]["year"],entry["startedAt"]["month"],entry["startedAt"]["day"]), 'my_start_date') + '\n'
-  xmltoWrite += "\t\t" + toMalval(toMaldate(entry["completedAt"]["year"],entry["completedAt"]["month"],entry["completedAt"]["day"]), 'my_finish_date') + '\n'
-  xmltoWrite += "\t\t" + toMalstr('', 'my_scanalation_group') + '\n'
-  xmltoWrite += "\t\t" + toMalval(validateInt(entry["score"]), 'my_score') + '\n'
-  xmltoWrite += "\t\t" + toMalval('', 'my_storage') + '\n'
-  xmltoWrite += "\t\t" + toMalval(toMalStatus(entry["status"], 'manga'), 'my_status') + '\n'
-  xmltoWrite += "\t\t" + toMalstr(validateStr(entry["notes"]), 'my_comments') + '\n'
-  xmltoWrite += "\t\t" + toMalval('0', 'my_times_read') + '\n'
-  xmltoWrite += "\t\t" + toMalstr('', 'my_tags') + '\n'
-  xmltoWrite += "\t\t" + toMalval('', 'my_reread_value') + '\n'
-  xmltoWrite += "\t\t" + toMalval('1', 'update_on_import') + '\n'
-  xmltoWrite += "\t</manga>\n"
-  return xmltoWrite
-
-def entry_animexml(malID, entry):
-  xmltoWrite = "\t<anime>\n"
-  xmltoWrite += "\t\t" + toMalval(malID, 'series_animedb_id') + '\n'
-  xmltoWrite += "\t\t" + toMalstr(validateStr(entry["media"]["title"]["romaji"]), 'series_title') + '\n'
-  xmltoWrite += "\t\t" + toMalval('', 'series_type') + '\n'
-  xmltoWrite += "\t\t" + toMalval(validateInt(entry["media"]["episodes"]), 'series_episodes') + '\n'
-  xmltoWrite += "\t\t" + toMalval('0', 'my_id') + '\n'
-  xmltoWrite += "\t\t" + toMalval(validateInt(entry["progress"]), 'my_watched_episodes') + '\n'
-  xmltoWrite += "\t\t" + toMalval(toMaldate(entry["startedAt"]["year"],entry["startedAt"]["month"],entry["startedAt"]["day"]), 'my_start_date') + '\n'
-  xmltoWrite += "\t\t" + toMalval(toMaldate(entry["completedAt"]["year"],entry["completedAt"]["month"],entry["completedAt"]["day"]), 'my_finish_date') + '\n'
-  xmltoWrite += "\t\t" + toMalval('', 'my_rated') + '\n'
-  xmltoWrite += "\t\t" + toMalval(validateInt(entry["score"]), 'my_score') + '\n'
-  xmltoWrite += "\t\t" + toMalval('', 'my_dvd') + '\n'
-  xmltoWrite += "\t\t" + toMalval('', 'my_storage') + '\n'
-  xmltoWrite += "\t\t" + toMalval(toMalStatus(entry["status"], 'anime'), 'my_status') + '\n'
-  xmltoWrite += "\t\t" + toMalstr(validateStr(entry["notes"]), 'my_comments') + '\n'
-  xmltoWrite += "\t\t" + toMalval('0', 'my_times_watched') + '\n'
-  xmltoWrite += "\t\t" + toMalval('', 'my_rewatch_value') + '\n'
-  xmltoWrite += "\t\t" + toMalstr('', 'my_tags') + '\n'
-  xmltoWrite += "\t\t" + toMalval('0', 'my_rewatching') + '\n'
-  xmltoWrite += "\t\t" + toMalval('0', 'my_rewatching_ep') + '\n'
-  xmltoWrite += "\t\t" + toMalval('1', 'update_on_import') + '\n'
-  xmltoWrite += "\t</anime>\n"
-  return xmltoWrite
-
 # Global Vars
 
 # Get Username
