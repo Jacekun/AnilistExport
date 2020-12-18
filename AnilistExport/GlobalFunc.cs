@@ -77,7 +77,7 @@ namespace AnilistExport
         }
 
         // Return JSON String, formatted from Anilist
-        public static string EntryJson(Entry entry, string media = "anime")
+        public static string EntryJson(JsonMediaEntry entry, string media = "anime")
         {
             string jsontoAdd = "\t{\n";
             // ID

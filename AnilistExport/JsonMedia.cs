@@ -10,26 +10,26 @@ namespace AnilistExport
     public class JsonMedia
     {
         [JsonProperty("lists")]
-        public Lists[] list { get; set; }
+        public JsonMediaLists[] list { get; set; }
     }
 
-    public class Lists
+    public class JsonMediaLists
     {
         [JsonProperty("status")]
         public string status { get; set; }
         [JsonProperty("entries")]
-        public Entry[] entries { get; set; }
+        public JsonMediaEntry[] entries { get; set; }
     }
 
-    public class Entry
+    public class JsonMediaEntry
     {
         [JsonProperty("status")]
         public string status { get; set; }
         // Dates
         [JsonProperty("completedAt")]
-        public Date completedAt { get; set; }
+        public JsonMediaDate completedAt { get; set; }
         [JsonProperty("startedAt")]
-        public Date startedAt { get; set; }
+        public JsonMediaDate startedAt { get; set; }
         // Progress
         [JsonProperty("progress")]
         public int progress { get; set; }
@@ -43,10 +43,10 @@ namespace AnilistExport
 
         // Anime/Manga Info
         [JsonProperty("media")]
-        public Media media { get; set; }
+        public JsonMediaInfo media { get; set; }
     }
 
-    public class Date
+    public class JsonMediaDate
     {
         [JsonProperty("year")]
         public int year { get; set; }
@@ -56,7 +56,7 @@ namespace AnilistExport
         public int day { get; set; }
     }
 
-    public class Media
+    public class JsonMediaInfo
     {
         // Id
         [JsonProperty("id")]
@@ -85,16 +85,16 @@ namespace AnilistExport
         public string description { get; set; }
         // Title
         [JsonProperty("title")]
-        public Title title { get; set; }
+        public JsonMediaTitle title { get; set; }
         // Other titles
         [JsonProperty("synonyms")]
         public string[] synonyms { get; set; }
         // Image link
         [JsonProperty("coverImage")]
-        public CoverImg coverImage { get; set; }
+        public JsonMediaCoverImg coverImage { get; set; }
     }
 
-    public class Title
+    public class JsonMediaTitle
     {
         [JsonProperty("english")]
         public string english { get; set; }
@@ -102,7 +102,7 @@ namespace AnilistExport
         public string romaji { get; set; }
     }
 
-    public class CoverImg
+    public class JsonMediaCoverImg
     {
         [JsonProperty("medium")]
         public string medium { get; set; }
