@@ -151,8 +151,6 @@ def entry_animexml(malID, entry):
   return xmltoWrite
 
 # Global Vars
-# Anilist API URL
-url = 'https://graphql.anilist.co'
 
 # Get Username
 userName = input("Enter your Anilist Username: ")

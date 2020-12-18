@@ -8,6 +8,9 @@ namespace AnilistExport
 {
     public static class GlobalFunc
     {
+        // Static Variables
+        public static string AnilistURL = "https://graphql.anilist.co"; // API URL, send requests
+
         // validators for data types
         public static string ValidateString(string text)
         {
