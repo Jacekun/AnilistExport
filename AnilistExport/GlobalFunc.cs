@@ -114,6 +114,32 @@ namespace AnilistExport
             jsontoAdd += "\t\t\"notes\": \"" + ValidateString(entry.notes) + "\"\n\t},\n";
             return jsontoAdd;
         }
+
+        // Return XML String, for MAL Xml
+        public static string EntryMalManga(string malID, JsonMediaEntry entry)
+        {
+            string xmltoWrite = "\t<manga>\n";
+            xmltoWrite += "\t\t" + toMalVal(malID, "manga_mangadb_id") + "\n";
+            xmltoWrite += "\t\t" + toMalString(ValidateString(entry.media.title.romaji), "manga_title") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(entry.media.volumes.ToString(), "manga_volumes") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(entry.media.chapters.ToString(), "manga_chapters") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("", "my_id") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(entry.progressVolumes.ToString(), "my_read_volumes") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(entry.progress.ToString(), "my_read_chapters") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(ValidateDate(entry.startedAt.year, entry.startedAt.month, entry.startedAt.day, true), "my_start_date") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(ValidateDate(entry.completedAt.year, entry.completedAt.month, entry.completedAt.day, true), "my_finish_date") + "\n";
+            xmltoWrite += "\t\t" + toMalString("", "my_scanalation_group") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(entry.score.ToString(), "my_score") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("", "my_storage") + "\n";
+            xmltoWrite += "\t\t" + toMalVal(toMalStatus(entry.status, "manga"), "my_status") + "\n";
+            xmltoWrite += "\t\t" + toMalString(ValidateString(entry.notes), "my_comments") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("0", "my_times_read") + "\n";
+            xmltoWrite += "\t\t" + toMalString("", "my_tags") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("", "my_reread_value") + "\n";
+            xmltoWrite += "\t\t" + toMalVal("1", "update_on_import") + "\n";
+            xmltoWrite += "\t</manga>\n";
+            return xmltoWrite;
+        }
     // End of class: GlobalFunc
     }
 }
