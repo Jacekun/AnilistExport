@@ -6,53 +6,7 @@ def validateInt(x):
     return str(x)
   return '0'
 
-# Check if not Null, and return
-def validateDate(year, month, day):
-  date = validateStr(year) + "-" + validateStr(month) + "-" + validateStr(day)
-  if (date == "--"):
-    return ""
-  else:
-    dateArr = date.split('-')
-    if len(dateArr[1]) < 2:
-      dateArr[1] = '0' + dateArr[1]
-    if len(dateArr[2]) < 2:
-      dateArr[2] = '0' + dateArr[2]
-    date = dateArr[0] + '-' + dateArr[1] + '-' + dateArr[2]
-  return date
-
 # Create string/int for MAL XML file
-def toMalstr(content, name):
-  return "<" + name + "><![CDATA[" + content + "]]></" + name + ">"
-
-def toMalval(content, name):
-  return "<" + name + ">" + content + "</" + name + ">"
-
-def toMaldate(year, month, day):
-  date = validateDate(year, month, day)
-  if (date == ""):
-    return "0000-00-00"
-  return date
-
-def toMalStatus(status, media):
-  malstatus = validateStr(status)
-  if (malstatus == "COMPLETED"):
-    return "Completed"
-  elif (malstatus == "PAUSED"):
-    return "On-Hold"
-  elif (malstatus == "CURRENT"):
-    if (media == 'anime'):
-      return "Watching"
-    else:
-      return "Reading"
-  elif (malstatus == "DROPPED"):
-    return "Dropped"
-  elif (malstatus == "PLANNING"):
-    if (media == 'anime'):
-      return "Plan to Watch"
-    else:
-      return "Plan to Read"
-  else:
-    return ""
 
 # Add texts on beginning of file
 def line_prepender(filename, line):
@@ -61,45 +15,6 @@ def line_prepender(filename, line):
         f.seek(0, 0)
         f.write(line + '\n' + content)
 
-    
-# Remove characters from end of file
-def write_remove(filename, char_count):
-  with open(filename, 'rb+') as filehandle:
-    filehandle.seek(-char_count, os.SEEK_END)
-    filehandle.truncate()
-
-# Return strings to add to json
-def entry_json(entry, media):
-  jsontoAdd = "\t{\n"
-  # ID
-  jsontoAdd += '\t\t"idAnilist": ' + str(entry["media"]["id"]) + ",\n"
-  malID = validateInt(entry["media"]["idMal"])
-  jsontoAdd += '\t\t"idMal": ' + malID + ",\n"
-  # Titles
-  jsontoAdd += '\t\t"titleEnglish": "' + validateStr(entry["media"]["title"]["english"]) + '",\n'
-  jsontoAdd += '\t\t"titleRomaji": "' + validateStr(entry["media"]["title"]["romaji"]) + '",\n'
-  jsontoAdd += '\t\t"synonyms": "' + validateStr(entry["media"]["synonyms"]) + '",\n'
-  # Format and Source
-  jsontoAdd += '\t\t"format": "' + validateStr(entry["media"]["format"]) + '",\n'
-  jsontoAdd += '\t\t"source": "' + validateStr(entry["media"]["source"]) + '",\n'
-  # Status and dates
-  jsontoAdd += '\t\t"status": "' + validateStr(entry["status"]) + '",\n'
-  jsontoAdd += '\t\t"startedAt": "' + validateDate(entry["startedAt"]["year"], entry["startedAt"]["month"], entry["startedAt"]["day"]) + '",\n'
-  jsontoAdd += '\t\t"completedAt": "' + validateDate(entry["completedAt"]["year"], entry["completedAt"]["month"], entry["completedAt"]["day"]) + '",\n'
-  # Progress
-  jsontoAdd += '\t\t"progress": ' + validateInt(entry["progress"]) + ',\n'
-
-  if (media == 'anime'):
-    jsontoAdd += '\t\t"totalEpisodes": ' + validateInt(entry["media"]["episodes"]) + ",\n"
-  else:
-    jsontoAdd += '\t\t"progressVolumes": ' + validateInt(entry["progressVolumes"]) + ",\n"
-    jsontoAdd += '\t\t"totalChapters": ' + validateInt(entry["media"]["chapters"]) + ",\n"
-    jsontoAdd += '\t\t"totalVol": ' + validateInt(entry["media"]["volumes"]) + ",\n"
-  
-  # Others
-  jsontoAdd += '\t\t"score": ' + validateInt(entry["score"]) + ",\n"
-  jsontoAdd += '\t\t"notes": "' + validateStr(entry["notes"]) + '"\n\t},\n'
-  return jsontoAdd
 
 # Return string to add to MAL XML
 def entry_mangaxml(malID, entry):
