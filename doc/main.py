@@ -22,15 +22,9 @@ userName = input("Enter your Anilist Username: ")
 
 # Query for User ID
 queryUser = '''
-query ($userName: String) { User (search: $userName)
-	{
-		id
-	}
-}
+query ($userName: String) { User (search: $userName) { id } }
 '''
-varUser = {
-  'userName': "'" + userName + "'"
-}
+varUser = { 'userName': "'" + userName + "'" }
 
 # Start App
 # Get USER ID, from USERNAME
